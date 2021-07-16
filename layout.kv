@@ -1,0 +1,67 @@
+#:set background_col (0.82, 0.93, 0.95, 1)
+#:set primary_text_col (0.69, 0.61, 0.85, 1)
+#:set text_input_background_image "assets/text_input_background.png"
+#:set heading_font "assets/heading_font.ttf"
+#:set pause_image "assets/pause.png"
+
+<UserInterface>:
+    canvas.before:
+        Color:
+            rgb: background_col
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            text: "Bird Song Player"
+            font_name: heading_font
+            font_size: 35
+            background_color: background_col
+            color: primary_text_col
+            size_hint: (1, 0.5)
+
+        TextInput:
+            id: bird_input
+            font_size: 18
+            multiline: False
+            padding: [0, 10, 0, 10]
+            on_text_validate: root.on_enter()
+            hint_text: "Enter Bird Name"
+            hint_text_color: primary_text_col
+            halign: "center"
+            background_color: background_col
+            background_normal: text_input_background_image
+            background_active: text_input_background_image
+            foreground_color: primary_text_col
+            size_hint: (1, 0.6)
+            padding_y: (20, 5)
+
+
+        BoxLayout:
+            orientation: "horizontal"
+
+            Label:
+                id: message_label
+                text: ""
+                color: primary_text_col
+                size_hint: (1, 1)
+
+            AnchorLayout:
+                size_hint: (0.4, 1)
+
+                Button:
+                    id: pause_button
+                    text: ""
+                    background_normal: pause_image
+                    background_active: pause_image
+                    background_down: pause_image
+                    on_release: root.play_pause()
+                    background_color: primary_text_col
+                    anchor_y: "center"
+                    anchor_x: "center"
+                    size_hint_max: (32, 32)
+
